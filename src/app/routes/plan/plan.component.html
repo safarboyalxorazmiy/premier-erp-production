@@ -1,0 +1,491 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://devel.bldk.mahkamahagung.go.id/webldk/assets/theme/tblr/dist/css/tabler.min.css?1674944402" rel="stylesheet" />
+<link href="https://devel.bldk.mahkamahagung.go.id/webldk/assets/theme/tblr/dist/css/tabler-flags.min.css?1674944402" rel="stylesheet" />
+<link href="https://devel.bldk.mahkamahagung.go.id/webldk/assets/theme/tblr/dist/css/tabler-payments.min.css?1674944402" rel="stylesheet" />
+<link href="https://devel.bldk.mahkamahagung.go.id/webldk/assets/theme/tblr/dist/css/tabler-vendors.min.css?1674944402" rel="stylesheet" />
+<link href="https://devel.bldk.mahkamahagung.go.id/webldk/assets/theme/tblr/dist/css/demo.min.css?1674944402" rel="stylesheet" />
+
+<style> 
+    form {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 20%;
+        margin: 0 auto;
+        height: 100vh;
+        align-items: center;
+    }
+
+    label {
+        display: flex; 
+        justify-content: flex-start;  
+        gap: 10px;
+        margin-top: 10px;
+        align-items: center;
+    }
+
+    label span {
+        width: 50px;
+        font-family: 'Lato', sans-serif;
+    }
+
+    label input {
+        font-family: 'Lato', sans-serif;
+        padding: 5px 12px;
+        font-size: 14px;
+        line-height: 20px;
+        color: #24292e;
+        vertical-align: middle;
+        background-color: #ffffff;
+        background-repeat: no-repeat;
+        background-position: right 8px center;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        outline: none;
+        box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
+    }
+
+    label input:focus{
+        border-color: #0366d6;
+        outline: none;
+        box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    }
+
+    .btn-primary {
+        margin-top: 15px;
+        width: 100%;
+        display: block;
+        outline: none;
+        cursor: pointer;
+        font-weight: 600;
+        border-radius: 3px;
+        padding: 12px 24px;
+        border: 0;
+        color: #000021;
+        background: #1de9b6;
+        line-height: 1.15;
+        font-size: 16px;
+    }
+
+    .btn-primary:hover {
+        transition: all .1s ease;
+        box-shadow: 0 0 0 0 #fff, 0 0 0 3px #1de9b6;
+    }
+
+
+    .tick-button {
+        width: auto;
+        display: inline-block;
+        outline: 0;
+        appearance: none;
+        padding: 0px 12px;
+        border: 0px solid transparent;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+        background-color: rgb(9, 128, 76);
+        box-shadow: rgb(19 170 82 / 40%) 0px 2px 3px;
+        color: rgb(255, 255, 255);
+        font-size: 14px;
+        font-weight: 400;
+        height: 36px;
+        transition: all 150ms ease-in-out 0s;
+    }
+
+    .tick-button:hover {
+        color: rgb(255, 255, 255);
+        background-color: rgb(17, 97, 73);
+        box-shadow: rgb(19 170 82 / 40%) 0px 2px 3px, rgb(195 231 202) 0px 0px 0px 3px;
+    }
+
+    .discard-button {
+        width: auto;
+        display: inline-block;
+        outline: 0;
+        appearance: none;
+        padding: 0px 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+        background-color: rgb(249, 251, 250);
+        border: 1px solid rgb(137, 151, 155);
+        box-shadow: rgb(6 22 33 / 30%) 0px 1px 2px;
+        color: rgb(61, 79, 88);
+        font-size: 14px;
+        font-weight: 400;
+        height: 36px;
+        transition: all 150ms ease-in-out 0s;
+    }
+
+    .discard-button:hover {
+        color: rgb(61, 79, 88);
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(93, 108, 116);
+        box-shadow: rgb(0 0 0 / 30%) 0px 4px 4px, rgb(231 238 236) 0px 0px 0px 3px;
+    }
+
+    .createdModal {
+        animation: wiggle 2s linear infinite;
+    }
+
+    .deleteModal {
+        animation: wiggle 2s linear infinite;
+    }
+
+    .updateModal {
+        animation: wiggle 2s linear infinite;
+    }
+
+    /* Keyframes */
+    @keyframes wiggle {
+        0%, 7% {
+            transform: rotateZ(0);
+        }
+        15% {
+            transform: rotateZ(-15deg);
+        }
+        20% {
+            transform: rotateZ(10deg);
+        }
+        25% {
+            transform: rotateZ(-10deg);
+        }
+        30% {
+            transform: rotateZ(6deg);
+        }
+        35% {
+            transform: rotateZ(-4deg);
+        }
+        40%, 100% {
+            transform: rotateZ(0);
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+
+    .createdModal {
+        position: absolute;
+        right: calc(3em);
+        bottom: calc(3em);
+        
+        height: 4em;
+        width: 20em;
+        
+        background: #fff;
+        background: linear-gradient(top, #fafafa, #fff);
+        border: none;
+        border-top: 3px solid #0366d6;
+        padding: 20px;
+        border-radius: 0 0 0.2em 0.2em;
+        color: #000;
+        font-family: Helvetica, Arial, Sans-serif;
+        font-size: 1em;
+        transform-origin: 50% 5em;
+    }
+
+    .deleteModal {
+        position: absolute;
+        right: calc(3em);
+        bottom: calc(3em);
+        
+        height: 4em;
+        width: 20em;
+        
+        background: #fff;
+        background: linear-gradient(top, #fafafa, #fff);
+        border: none;
+        border-top: 3px solid #C60001;
+        padding: 20px;
+        border-radius: 0 0 0.2em 0.2em;
+        color: #000;
+        font-family: Helvetica, Arial, Sans-serif;
+        font-size: 1em;
+        transform-origin: 50% 5em;
+    }
+
+    .updateModal {
+        position: absolute;
+        right: calc(3em);
+        bottom: calc(3em);
+        
+        height: 4em;
+        width: 20em;
+        
+        background: #fff;
+        background: linear-gradient(top, #fafafa, #fff);
+        border: none;
+        border-top: 3px solid #FBC02D;
+        padding: 20px;
+        border-radius: 0 0 0.2em 0.2em;
+        color: #000;
+        font-family: Helvetica, Arial, Sans-serif;
+        font-size: 1em;
+        transform-origin: 50% 5em;
+    }
+
+    ul li:hover {
+        background: #e9ecef;
+    }
+
+    .delete-icon:hover i {
+        color: #e9ecef;
+    }
+
+    .delete-icon i {
+        color: #fff;
+    }
+
+    .edit-icon:hover i {
+        color: #111;
+    }
+</style>
+<body>
+  <form (ngSubmit)="submit()" *ngIf="!isLoggedIn">
+    <div>
+        <label for="email">
+            <span>Email: </span>
+            <input type="email" id="email" class="form-control" name="name" [(ngModel)]="email" ngModel required />
+        </label>
+        
+        <label for="password">
+            <span>Parol: </span>
+            <input type="password" id="password" class="form-control" name="name" [(ngModel)]="password" ngModel required />
+        </label>
+        <button type="submit" class="btn-primary login-btn">Kirish</button>
+    </div>
+  </form>
+
+  <div *ngIf="isLoggedIn">
+    <div style="display: flex; justify-content: center; gap: 20px;">
+        <div 
+            style="
+                width: 75%; 
+                margin-top: 25px; 
+                border: 1px solid #ced4da; 
+                border-radius: 6px; 
+                background-color: #fff;">
+            <ul 
+                style="
+                    width: 100%; 
+                    list-style-type: none; 
+                    padding: 0;
+                    margin: 0;">
+                <li 
+                    style="
+                        display: flex; 
+                        align-items: center; 
+                        justify-content: center; 
+                        padding: 10px 30px;
+                        border-bottom: 1px solid #ced4da;
+                        font-size: 16px;" *ngFor="let plan of plans">
+                    <div 
+                        style="
+                            width: 50%;">
+                        {{plan.modelName}} {{plan.modelCode}} {{plan.modelComment}}
+                    </div>
+                    
+                    <div 
+                        style="
+                            width: 30%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        ">{{plan.plan}}</div>   
+                    
+                    <div style="
+                        width: 20%; 
+                        display: flex; 
+                        justify-content: flex-end;
+                        gap: 10px; ">
+                        <div class="edit-icon"
+                            style="
+                                display: flex; 
+                                align-items: center; 
+                                justify-content: center; 
+                                cursor: pointer; 
+                                background-color: #FBC02D; 
+                                height: 35px; 
+                                width: 35px; 
+                                padding: 5px; 
+                                border-radius: 50%;" (click)="showUpdateModal(plan)">
+
+                            <i class="material-icons" 
+                            style="
+                                font-size: 25px;
+                            ">edit</i>
+                        </div>
+                        
+                        <div 
+                            class="delete-icon" 
+                            style="
+                            display: flex; 
+                            align-items: center; 
+                            justify-content: center; 
+                            cursor: pointer; 
+                            background-color: #C60001; 
+                            height: 35px; 
+                            width: 35px; 
+                            padding: 5px; 
+                            border-radius: 50%;
+                            border: 1px solid #fff;" (click)="deletePlan(plan)">
+                                <i class="material-icons" style=" font-size: 25px;">delete</i>
+                        </div>
+                    </div>
+                </li>
+
+                <li 
+                    style="
+                        display: flex; 
+                        align-items: center; 
+                        justify-content: center;
+                        padding: 10px 0;">
+                    <div style=" 
+                        background-color: #689F38; 
+                        width: 30px; 
+                        height: 30px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 50%;
+                        cursor: pointer;" (click)="showCreateModal()">
+                            <i class="material-icons" style="color: #fff;">add</i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </div>
+
+  <div *ngIf="isCreated" class="createdModal">
+    Muvafaqqiyatli yaratildi!
+  </div>
+
+  <div *ngIf="isUpdated" class="updateModal">
+    Muvafaqqiyatli o'zgartirildi!
+  </div>
+
+  <div *ngIf="isDeleted" class="deleteModal">
+    Muvafaqqiyatli o'chirildi!
+  </div>
+
+  <div *ngIf="createModalIsVisible" class="modal modal-blur" id="modal-report" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+    <div class="modal-dialog modal-lg" role="document" style="height: 540px">
+      <div class="modal-content" style="height: 455px;">
+        <div class="modal-header">
+          <h5 class="modal-title">Mahsulotni linyaga berish</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeCreateModal()"></button>
+        </div>
+        
+        <div class="modal-body">
+          
+          <div class="row">
+            <div class="col-md-12">
+              <div class="mb-3">
+                <div style="width: 100%;">
+                    <label class="form-label">Modelni tanlang.</label>
+                    <p-dropdown 
+                        [options]="models" 
+                        [(ngModel)]="selectedModel"
+                        [showClear]="true" 
+                        placeholder="Model"
+                        [filter]="true"
+                        [filterBy]="'name'"
+                        [filterPlaceholder]="'Modelni qidirish...'"
+                        [style]="{'width':'100%'}"
+                        (onChange)="selectModel($event)">
+                        >
+                        <ng-template pTemplate="selectedItem">
+                            <div class="country-item">
+                                {{selectedModel.name}} 
+                            </div>
+                        </ng-template>
+            
+                        <ng-template let-model pTemplate="item">
+                            <div class="country-item">
+                                {{model.name}}
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+            
+                <div *ngIf="selectedModel != null" style="width: 100%;">
+                    <label class="form-label">{{selectedModel.name}}ning modelini tanlang.</label>
+            
+                    <p-dropdown 
+                        [options]="innerModels" 
+                        [(ngModel)]="selectedInnerModel"
+                        [showClear]="true" 
+                        placeholder="{{selectedModel.name}}ning modeli"
+                        [filter]="true"
+                        [filterBy]="'name'"
+                        [filterPlaceholder]="'Modelni qidirish...'"
+                        [style]="{'width':'100%'}">
+                        <ng-template pTemplate="selectedItem">
+                            <div class="innermodel-item">
+                                {{selectedInnerModel.name}} {{selectedInnerModel.code}} {{selectedInnerModel.comment}}
+                            </div>
+                        </ng-template>
+            
+                        <ng-template let-innermodel pTemplate="item">
+                            <div class="innermodel-item">
+                                {{innermodel.name}} {{innermodel.code}} {{innermodel.comment}}
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+            
+                <div *ngIf="selectedInnerModel != null" style="width: 100%; margin-top: 20px;">
+                    <label class="form-label">Planni kiriting!</label>
+                    
+                    <input type="text"  [(ngModel)]="plan" class="form-control" style="border: 1px solid #ced4da;" placeholder="Plan.." />
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn-primary" (click)="createPlan()">Saqlash</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="updateModalIsVisible" class="modal modal-blur" id="modal-report" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{selectedUpdatableModel.modelName}} {{selectedUpdatableModel.modelCode}} {{selectedUpdatableModel.modelComment}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeUpdateModal()"></button>
+        </div>
+        
+        <div class="modal-body">
+          
+          <div class="row">
+            <div class="col-md-12">
+              <div class="mb-3">
+            
+                <div style="width: 100%; margin-top: 20px;">
+                    <label class="form-label">Planni kiriting!</label>
+                    
+                    <input type="text" [(ngModel)]="plan" class="form-control" style="border: 1px solid #ced4da;" placeholder="Plan.." />
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn-primary" (click)="updatePlan()">Saqlash</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

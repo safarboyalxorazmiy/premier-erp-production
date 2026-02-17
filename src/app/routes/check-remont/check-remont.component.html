@@ -1,0 +1,16 @@
+<div class="card" style="padding-left: 70px; margin-right: 70px;">
+    <div class="flex flex-wrap align-items-center justify-content-left card-container blue-container">
+        <h1 class="left-0">Check Remont</h1>
+        <input style="margin-left: 20px" type="text" id="serial" placeholder="Serial Nomer" (keyup)="change()" autofocus
+            pInputText [(ngModel)]="serial" />
+        <p [hidden]="!someError" style="margin-left: 20px; color: red;">{{errorText}}</p>
+        <h1 [hidden]="!added" style="margin-left: 20px; color: green;">{{addedText}}</h1>
+    </div>
+</div>
+
+<div *ngIf="someError">
+    <p style="color: red;">Remont tugallanmagan</p>
+    <p style="color: red;">Defekt nomi: {{result.data.defect}}</p>
+    <p style="color: red;">Xudud: {{result.data.checkpoint}}</p>
+    <p style="color: red;">Vaqt: {{result.data.time}}</p>
+</div>

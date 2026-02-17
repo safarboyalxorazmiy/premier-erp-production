@@ -1,0 +1,23 @@
+<div class="flex" style="justify-content: center; align-items: center; flex-direction: column;">
+    <div *ngIf="!selectedType">
+        <h1>Maxsulot turini tanlang</h1>
+        <div class="flex" style="gap: 20px; justify-content: center;">
+            <button pButton pRipple label="LOCAL" class="p-button-success" (click)="selectType('F')"></button>
+            <button pButton pRipple label="EXPORT" class="p-button-success" (click)="selectType('E')"></button>
+        </div>
+    </div>
+
+    <div *ngIf="(selectedType && !selectedModel)">
+        <h1 class="text-center">Maxsulot turini tanlang</h1>
+        <div class="text-center" >
+            <button pButton pRipple label="{{model.name}}" *ngFor="let model of modelList" class="p-button-success mx-2 mb-2" (click)="selectModel(model)"></button>
+        </div>
+    </div>
+    
+    <div *ngIf="(selectedType && selectedModel && model == '')">
+        
+        <div class="flex" style="flex-direction: column; height: 95vh; align-items: center; justify-content: center; gap: 70px;" >
+            <a href="/metall/{{model.id}}" style="color: black; text-decoration: underline; font-size: 24px;" *ngFor="let model of modelArray">{{model.name + " " + model.comment}}</a>
+        </div>
+    </div>
+</div>

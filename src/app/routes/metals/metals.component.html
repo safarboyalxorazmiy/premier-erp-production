@@ -1,0 +1,151 @@
+<div style="margin-top: 10px;">
+
+    <div>
+        <p [hidden]="!someError"  style="margin-left: 20px; color: red; text-align: center;">{{errorText}}</p>
+        <h1 [hidden]="!added" style="margin-left: 20px; color: green; text-align: center;">{{addedText}}</h1>
+    </div>
+
+    <div class="d-flex text-center">
+        <h2 style="padding-left: 10px;">Bugun ishlab chiqarilgan maxsulot soni: {{count?.smena1}}/{{count?.smena2}}
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+            class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+            <button type="button" pButton pRipple icon="pi pi-refresh" (click)="openReprintDialog()"
+            class="p-button-warning mr-2" pTooltip="Qayta chiqarish" tooltipPosition="bottom"></button>
+        </h2>
+    </div>
+
+    <div class="flex flex-wrap absolute top-0 right-0 align-items-center justify-content-right">
+        <h1 style="padding-right: 100px">{{ time | date: 'HH:mm:ss' }}</h1>
+    </div>
+
+    <h1 style="color: 'red';">{{errorText}}</h1>
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start;">
+        <ng-container style="align-items: center;" *ngFor="let item of plan; index as i">
+            <button type="button" style="flex: 0 1 calc(33.3% - 32px); margin-right: 10px; margin-bottom: 10px; padding: 10px; font-size: larger; text-align: center; height: 100px;"[disabled]="clicked" (click)="requestSerial(item); clicked = true" pButton pRipple class="p-button-secondary">{{item.name}} {{": "}} {{item.plan}}</button>
+        </ng-container>
+    </div>
+
+    <p-table #dt id="dt" [value]="plan" dataKey="id" editMode="row" responsiveLayout="scroll">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                Kunlik reja
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th >Name </th>
+                <th >Comment </th>
+                <th >Plan </th>
+                <th >GsCount </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="product">
+                <td>{{ product.name }}</td>
+                <td>{{ product.comment }}</td>
+                <td>{{ product.plan }}</td>
+                <td>{{ product.gscount }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <div class="card">
+        <div class="grid">
+            <div class="col">
+                <p-table [value]="lastProduct" responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Serial</th>
+                            <th>Model</th>
+                            <th>Time</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-prod>
+                        <tr>
+                            <td>{{prod.serial}}</td>
+                            <td>{{prod.model}}</td>
+                            <td>{{prod.time}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+            <div class="col">
+                <p-table [value]="byModel" responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Name</th>
+                            <th>Soni</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-prod>
+                        <tr>
+                            <td>{{prod.name}}</td>
+                            <td>{{prod.count}}</td>
+                        </tr>
+                    </ng-template>
+  
+                </p-table>
+            </div>
+        </div>
+    </div>
+
+    <p-dialog header="Qayta chiqarish (3 kunlik)" [(visible)]="reprintDialogVisible" [modal]="true"
+        [style]="{width: '750px', maxHeight: '85vh'}" [draggable]="false" [resizable]="false">
+
+        <div class="reprint-search">
+            <label class="reprint-search-label">Serial bo'yicha qidirish</label>
+            <div class="reprint-search-row">
+                <input type="text" class="reprint-search-input" [(ngModel)]="reprintSearchSerial"
+                    placeholder="Serial raqamini kiriting..." (keydown.enter)="reprintBySerial()">
+                <button type="button" class="reprint-btn-print" [disabled]="reprintClicked || !reprintSearchSerial"
+                    (click)="reprintBySerial()">
+                    <i class="pi pi-print"></i> Chiqarish
+                </button>
+            </div>
+        </div>
+
+        <div *ngIf="reprintLoading" class="reprint-state-msg">Yuklanmoqda...</div>
+        <div *ngIf="!reprintLoading && reprintDays.length === 0" class="reprint-state-msg">
+            3 kunda hech narsa chiqarilmagan
+        </div>
+
+        <div *ngIf="!reprintLoading && reprintDays.length > 0">
+            <div *ngFor="let day of reprintDays" class="reprint-day">
+                <span class="reprint-day-label">{{day.label}}</span>
+                <div class="reprint-groups">
+                    <button *ngFor="let group of day.groups"
+                        class="reprint-group-btn" [class.active]="selectedReprintGroup === group.key"
+                        (click)="selectReprintGroup(group.key)">
+                        {{group.model}} ({{group.count}})
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="selectedReprintGroup">
+                <p-table [value]="getSelectedSerials()" responsiveLayout="scroll"
+                    [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                    currentPageReportTemplate="{first} - {last} / {totalRecords}">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Serial</th>
+                            <th>Vaqt</th>
+                            <th>Qayta chiqarish</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                        <tr>
+                            <td>{{item.serial}}</td>
+                            <td>{{item.time}}</td>
+                            <td>
+                                <button type="button" class="reprint-serial-btn p-button-sm" pButton pRipple
+                                    icon="pi pi-print" [disabled]="reprintClicked"
+                                    (click)="reprintSerial(item.serial)">
+                                </button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </p-dialog>
+
+</div>

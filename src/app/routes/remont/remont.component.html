@@ -1,0 +1,31 @@
+<div>
+    <h2>Defektlarni kiritish</h2>
+    <p [hidden]="!someError" style="margin-left: 20px; color: red;">{{errorText}}</p>
+    <div class="card">
+        <div class="flex align-items-stretch flex-wrap card-container">
+            <div class="flex align-items-center justify-content-center font-bold text-white border-round m-2">
+                <p-dropdown [options]="lines" [(ngModel)]="selectedLine" (onChange)="lineChanged()" optionLabel="name"></p-dropdown>
+            </div>
+            <div class="flex align-items-center justify-content-center font-bold text-white border-round m-2">
+                <p-dropdown [options]="activeTypes" [(ngModel)]="selectedActiveType" optionLabel="defect_name"></p-dropdown>
+            </div>
+            <div class="flex align-items-center justify-content-center font-bold text-white border-round m-2">
+                <input type="text" pInputText [(ngModel)]="serial" class="p-inputtext-sm"  placeholder="Serial Nomer"> 
+            </div>
+            <div class="flex align-items-center justify-content-center font-bold text-white border-round m-2">
+                <button pButton pRipple type="button" label="Kiritish" class="p-button-rounded" (click)="defKiritish()" ></button>
+            </div>
+        </div>
+    </div>
+    <button pButton pRipple type="button" label="Camera" class="p-button-rounded" (click)="cameraOn()" ></button>
+
+</div>
+
+<div class="kt-portlet__body">
+    <zxing-scanner  *ngIf="scannerEnabled" [device]="deviceCurrent" (deviceChange)="onDeviceChange($event)" (scanSuccess)="onCodeResult($event)"
+    [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
+    (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
+</div>
+
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

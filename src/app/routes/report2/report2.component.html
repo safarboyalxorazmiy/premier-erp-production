@@ -1,0 +1,98 @@
+<div>
+   <div class="grid">
+        <div class="col flex justify-content-center" style="background-color: blue; ; height:1080px;">
+            <div class="card">
+                <h1> </h1>
+                <div class="flex justify-content-center" style="width: 540px; background-color: white;" >
+                    <h1>Ishlab chiqrilgan maxsulot soni</h1>
+                </div>
+                <div class="flex justify-content-center text-center">
+                    <h1 style="width: 540px; background-color: white;">45</h1>
+                </div>
+
+                <div class="flex justify-content-center text-center">
+                    <h1 style="width: 540px; background-color: white;">Modellar ro'yhati</h1>
+                </div>
+                <div class="flex justify-content-center">
+                    <p-table [value]="todayStatistics?.data?.packing_models" responsiveLayout="scroll" style="width: 540px; background-color: white;">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Model</th>
+                                <th>Soni</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-prod>
+                            <tr>
+                                <td>{{prod.name}}</td>
+                                <td>{{prod.count}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+     
+            </div>
+        </div>
+        <div class="col flex justify-content-center" style="background-color: cornflowerblue; ; height:1080px;">
+            <div class="card" >
+                
+                <div class="flex justify-content-center text-center" style="width: 540px; background-color: white;" >
+                    <h1 style="width: 540px; background-color: white;">Reja</h1>
+                </div>
+                <div class="flex justify-content-center text-center">
+                    <h1 style="width: 540px; background-color: white;">400</h1>
+                </div>
+                <div class="flex justify-content-center text-center">
+                    <h1 style="width: 540px; background-color: white;">Bajarildi</h1>
+                </div>
+                <div class="flex justify-content-center text-center">
+                    <h1 style="width: 540px; background-color: white;">45%</h1>
+                </div>
+     
+            </div>
+        </div>
+   </div>
+</div>
+<!-- <div *ngIf="loaded">
+    <table style="margin-left: 5%; width: 90%; margin-right: 5%">
+        <tr>
+            <th>Liniya nomi</th>
+            <th>Maxsulot</th>
+            <th>Defect</th>
+            <th>Defect %</th>
+        </tr>
+        <tr>
+            <td>Qadoqlash</td>
+            <td>{{todayStatistics?.data?.counters.packing_smena1}}/{{todayStatistics?.data?.counters.packing_smena2}}</td>
+            <td>{{todayStatistics?.data?.defect_counters.packing_smena1}}/{{todayStatistics?.data?.defect_counters.packing_smena2}}</td>
+            <td>{{((todayStatistics?.data?.defect_counters.packing_smena1/todayStatistics?.data?.counters?.packing_smena1) * 100).toFixed(1)}}% / {{((todayStatistics?.data?.defect_counters.packing_smena2/todayStatistics?.data?.counters?.packing_smena2) * 100).toFixed(1)}}%</td>
+        </tr>
+        </table>
+
+
+
+    <div style="padding-top: 10px; text-align: center;">
+        <h2 >Modellar bo'yicha</h2>
+
+    </div>
+    <div class="align-items-center justify-content-center">
+        
+    </div>
+  
+    <div class="container" style="margin-left: 5%; width: 90%; align-tracks: center;">
+        <h3 class="left-0">Qadoqlash liniyasi:</h3>
+        <p-table [value]="todayStatistics?.data?.packing_models" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Model</th>
+                    <th>Soni</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-prod>
+                <tr>
+                    <td>{{prod.name}}</td>
+                    <td>{{prod.count}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div> -->

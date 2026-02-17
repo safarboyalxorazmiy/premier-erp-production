@@ -1,0 +1,102 @@
+<div class="card" style="padding-left: 70px; margin-right: 70px;">
+    <div class="flex flex-wrap align-items-center justify-content-left card-container blue-container">
+        <h1 class="left-0">Yig'ish liniyasi</h1>
+        <input style="margin-left: 20px" type="text" id="serial" placeholder="Serial Nomer" (keyup)="change()" autofocus
+            pInputText [(ngModel)]="serial" />
+        <p [hidden]="!someError" style="margin-left: 20px; color: red;">{{errorText}}</p>
+        <h1 [hidden]="!added" style="margin-left: 20px; color: green;">{{addedText}}</h1>
+        <h2 style="padding-left: 10px;">Bugun ishlab chiqarilgan maxsulot soni: {{count?.smena1}}/{{count?.smena2}}
+            
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+            class="p-button-success ml-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+        
+        </h2>
+    </div>
+    <div class="flex flex-wrap absolute top-0 right-0 align-items-center justify-content-right">
+        <h1 style="padding-right: 100px">{{ time | date: 'HH:mm:ss' }}</h1>
+    </div>
+    <div class="card">
+        <div class="grid">
+            <div class="col">
+                <p-table [value]="lastProduct" responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Serial</th>
+                            <th>Model</th>
+                            <th>Time</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-prod>
+                        <tr>
+                            <td>{{prod.serial}}</td>
+                            <td>{{prod.model}}</td>
+                            <td>{{prod.time}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+            <div class="col">
+                <p-table [value]="byModel" responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Model</th>
+                            <th>Soni</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-prod>
+                        <tr>
+                            <td>{{prod.name}}</td>
+                            <td>{{prod.count}}</td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <h2>Mavjud detallar ro'yhati </h2>
+    <div class="card">
+        <div class="grid">
+            <div class="col">
+                <p-table [value]="rest" styleClass="p-datatable-sm">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product let-index="rowIndex">
+                        <ng-template [ngIf]="product.quantity && index % 2 !=0">
+                            <tr>
+                                <td>{{product.code}}</td>
+                                <td>{{product.name}}</td>
+                                <td>{{product.quantity}}</td>
+                            </tr>
+                        </ng-template>
+                    </ng-template>
+                </p-table>
+            </div>
+            <div class="col">
+                <p-table [value]="rest" styleClass="p-datatable-sm">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product let-index="rowIndex">
+                        <ng-template [ngIf]="product.quantity && index % 2 ==0">
+                            <tr>
+                                <td>{{product.code}}</td>
+                                <td>{{product.name}}</td>
+                                <td>{{product.quantity}}</td>
+                            </tr>
+                        </ng-template>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

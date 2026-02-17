@@ -1,0 +1,53 @@
+<div style="text-align: center;">
+    <h2>Yig'ish liniyasiga detallarni qabul qilish</h2>
+</div>
+
+<div class="grid">
+    <div class="col-offset-0">
+        <h3>Qabul qilish liniyasi </h3>
+    </div>
+    <div style="margin-left: 20px">
+        <p-dropdown [options]="lines" [(ngModel)]="selectedLine" optionLabel="name" ></p-dropdown>
+    </div>
+</div>
+
+
+<div class="grid">
+        <div class="col-offset-0">
+            <h3>Serial nomer </h3>
+        </div>
+        <div class="col-offset-0" >
+            <input style="margin-left: 20px" type="text" id="serial" placeholder="Serial Nomer" (keyup)="change()" autofocus
+            pInputText [(ngModel)]="serial" />
+            <!-- <input type="text" pInputText [(ngModel)]="serial" (keyup)="change()"/> -->
+        </div>
+        <div class="col-offset-0" >
+            <p [hidden]="!someError" style="margin-left: 20px; color: red;">{{errorText}}</p>
+            <h1 [hidden]="!added"  style="margin-left: 20px; color: green;">{{addedText}}</h1>
+        </div>
+</div>
+
+
+<div style="text-align: center;">
+    <h2>GP Komponentlar ro'yhati</h2>
+</div>
+
+<div *ngIf="loaded">
+    <p-table [value]="balance.data" [scrollable]="true" >
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Quantity</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-comp>
+            <tr>
+                <td>{{comp.code}}</td>
+                <td>{{comp.name}}</td>
+                <td>{{comp.quantity}}</td>
+    
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

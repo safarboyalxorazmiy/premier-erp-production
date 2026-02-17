@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.angular/
+.sass-cache/
+tmp/
+.env
+.env.*
+.DS_Store

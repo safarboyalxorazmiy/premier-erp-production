@@ -1,0 +1,524 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://devel.bldk.mahkamahagung.go.id/webldk/assets/theme/tblr/dist/css/tabler.min.css?1674944402" rel="stylesheet" />
+<link href="https://devel.bldk.mahkamahagung.go.id/webldk/assets/theme/tblr/dist/css/tabler-flags.min.css?1674944402" rel="stylesheet" />
+<link href="https://devel.bldk.mahkamahagung.go.id/webldk/assets/theme/tblr/dist/css/tabler-payments.min.css?1674944402" rel="stylesheet" />
+<link href="https://devel.bldk.mahkamahagung.go.id/webldk/assets/theme/tblr/dist/css/tabler-vendors.min.css?1674944402" rel="stylesheet" />
+<link href="https://devel.bldk.mahkamahagung.go.id/webldk/assets/theme/tblr/dist/css/demo.min.css?1674944402" rel="stylesheet" />
+
+<style> 
+    form {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 20%;
+        margin: 0 auto;
+        height: 100vh;
+        align-items: center;
+    }
+
+    label {
+        display: flex; 
+        justify-content: flex-start;  
+        gap: 10px;
+        margin-top: 10px;
+        align-items: center;
+    }
+
+    label span {
+        width: 50px;
+        font-family: 'Lato', sans-serif;
+    }
+
+    input.form-control {
+        font-family: 'Lato', sans-serif;
+        padding: 5px 12px;
+        font-size: 14px;
+        line-height: 20px;
+        color: #24292e;
+        vertical-align: middle;
+        background-color: #ffffff;
+        background-repeat: no-repeat;
+        background-position: right 8px center;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        outline: none;
+        box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
+    }
+
+    input.form-control:focus {
+        border-color: #0366d6;
+        outline: none;
+        box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    }
+
+    .login-btn {
+        margin-top: 15px;
+        width: 100%;
+        display: block;
+        outline: none;
+        cursor: pointer;
+        font-weight: 600;
+        border-radius: 3px;
+        padding: 12px 24px;
+        border: 0;
+        color: #000021;
+        background: #1de9b6;
+        line-height: 1.15;
+        font-size: 16px;
+    }
+
+    .login-btn:hover {
+        transition: all .1s ease;
+        box-shadow: 0 0 0 0 #fff, 0 0 0 3px #1de9b6;
+    }
+
+    .tick-button {
+        width: auto;
+        display: inline-block;
+        outline: 0;
+        appearance: none;
+        padding: 0px 12px;
+        border: 0px solid transparent;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+        background-color: rgb(9, 128, 76);
+        box-shadow: rgb(19 170 82 / 40%) 0px 2px 3px;
+        color: rgb(255, 255, 255);
+        font-size: 14px;
+        font-weight: 400;
+        height: 36px;
+        transition: all 150ms ease-in-out 0s;
+    }
+
+    .tick-button:hover {
+        color: rgb(255, 255, 255);
+        background-color: rgb(17, 97, 73);
+        box-shadow: rgb(19 170 82 / 40%) 0px 2px 3px, rgb(195 231 202) 0px 0px 0px 3px;
+    }
+
+    .discard-button {
+        width: auto;
+        display: inline-block;
+        outline: 0;
+        appearance: none;
+        padding: 0px 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+        background-color: rgb(249, 251, 250);
+        border: 1px solid rgb(137, 151, 155);
+        box-shadow: rgb(6 22 33 / 30%) 0px 1px 2px;
+        color: rgb(61, 79, 88);
+        font-size: 14px;
+        font-weight: 400;
+        height: 36px;
+        transition: all 150ms ease-in-out 0s;
+    }
+
+    .discard-button:hover {
+        color: rgb(61, 79, 88);
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(93, 108, 116);
+        box-shadow: rgb(0 0 0 / 30%) 0px 4px 4px, rgb(231 238 236) 0px 0px 0px 3px;
+    }
+
+    .createdModal {
+        animation: wiggle 2s linear infinite;
+    }
+
+    @keyframes wiggle {
+        0%, 7% {
+            transform: rotateZ(0);
+        }
+        15% {
+            transform: rotateZ(-15deg);
+        }
+        20% {
+            transform: rotateZ(10deg);
+        }
+        25% {
+            transform: rotateZ(-10deg);
+        }
+        30% {
+            transform: rotateZ(6deg);
+        }
+        35% {
+            transform: rotateZ(-4deg);
+        }
+        40%, 100% {
+            transform: rotateZ(0);
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+
+    .createdModal {
+        position: absolute;
+        right: calc(3em);
+        bottom: calc(3em);
+        
+        height: 4em;
+        width: 20em;
+        
+        background: #fff;
+        background: linear-gradient(top, #fafafa, #fff);
+        border: none;
+        border-top: 3px solid #0366d6;
+        padding: 20px;
+        border-radius: 0 0 0.2em 0.2em;
+        color: #000;
+        font-family: Helvetica, Arial, Sans-serif;
+        font-size: 1em;
+        transform-origin: 50% 5em;
+    }
+
+    .logo {
+      opacity: 1!important;
+      text-decoration: none;
+      color: black;
+    }
+</style>
+
+<form (ngSubmit)="submit()" *ngIf="!isLoggedIn">
+    <div>
+        <label for="email">
+            <span>Email: </span>
+            <input type="email" id="email" class="form-control" name="name" [(ngModel)]="email" ngModel required />
+        </label>
+        
+        <label for="password">
+            <span>Parol: </span>
+            <input type="password" id="password" class="form-control" name="name" [(ngModel)]="password" ngModel required />
+        </label>
+        <button type="submit" class="login-btn">Kirish</button>
+    </div>
+</form>
+
+<div *ngIf="isLoggedIn">
+    <!-- Navbar -->
+    <div class="page">
+        <div class="sticky-top">
+            <header class="navbar navbar-expand-md navbar-light sticky-top d-print-none">
+              <div class="container-xl">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3 logo" style="font-family: 'Lato', sans-serif; font-size: 18px;">
+                  
+                    Logist
+                
+                </h1>
+                <div class="navbar-nav flex-row order-md-last">
+                  <div class="nav-item d-none d-md-flex me-3">
+                    <div class="btn-list">
+                      
+                    </div>
+                  </div>
+                  <div class="d-none d-md-flex">
+                   
+                    <div class="nav-item dropdown d-none d-md-flex me-3">
+                      <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">Last updates</h3>
+                          </div>
+                          <div class="list-group list-group-flush list-group-hoverable">
+                            <div class="list-group-item">
+                              <div class="row align-items-center">
+                                <div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span></div>
+                                <div class="col text-truncate">
+                                  <a href="#" class="text-body d-block">Example 1</a>
+                                  <div class="d-block text-muted text-truncate mt-n1">
+                                    Change deprecated html tags to text decoration classes (#29604)
+                                  </div>
+                                </div>
+                                <div class="col-auto">
+                                  <a href="#" class="list-group-item-actions">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" /></svg>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="list-group-item">
+                              <div class="row align-items-center">
+                                <div class="col-auto"><span class="status-dot d-block"></span></div>
+                                <div class="col text-truncate">
+                                  <a href="#" class="text-body d-block">Example 2</a>
+                                  <div class="d-block text-muted text-truncate mt-n1">
+                                    justify-content:between ⇒ justify-content:space-between (#29734)
+                                  </div>
+                                </div>
+                                <div class="col-auto">
+                                  <a href="#" class="list-group-item-actions show">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-yellow" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" /></svg>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="list-group-item">
+                              <div class="row align-items-center">
+                                <div class="col-auto"><span class="status-dot d-block"></span></div>
+                                <div class="col text-truncate">
+                                  <a href="#" class="text-body d-block">Example 3</a>
+                                  <div class="d-block text-muted text-truncate mt-n1">
+                                    Update change-version.js (#29736)
+                                  </div>
+                                </div>
+                                <div class="col-auto">
+                                  <a href="#" class="list-group-item-actions">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" /></svg>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="list-group-item">
+                              <div class="row align-items-center">
+                                <div class="col-auto"><span class="status-dot status-dot-animated bg-green d-block"></span></div>
+                                <div class="col text-truncate">
+                                  <a href="#" class="text-body d-block">Example 4</a>
+                                  <div class="d-block text-muted text-truncate mt-n1">
+                                    Regenerate package-lock.json (#29730)
+                                  </div>
+                                </div>
+                                <div class="col-auto">
+                                  <a href="#" class="list-group-item-actions">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" /></svg>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="nav-item dropdown">
+                    <a class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu" (click)="toggleMenu()" style=" cursor: pointer;">
+                      <span class="avatar avatar-sm" style="background-image: url(https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg)"></span>
+                      <div class="d-none d-xl-block ps-2">
+                        <div>{{logistName}}</div>
+                        <div class="mt-1 small text-muted">Logist</div>
+                      </div>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menuOpened" style="display: block; right: 0; bottom: -216px;">
+                      <a href="#" class="dropdown-item">Status</a>
+                      <a href="./profile.html" class="dropdown-item">Profile</a>
+                      <a href="#" class="dropdown-item">Feedback</a>
+                      <div class="dropdown-divider"></div>
+                      <a href="./settings.html" class="dropdown-item">Settings</a>
+                      <a href="./sign-in.html" class="dropdown-item">Logout</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </header>
+
+            <div class="page-header d-print-none"  (click)="closeMenu()">
+                <div class="container-xl">
+                  <div class="row g-2 align-items-center">
+                    <div class="col">
+                      <div class="page-pretitle">
+                        Ko'rsatma
+                      </div>
+                      <h2 class="page-title">
+                        Bosh sahifa
+                      </h2>
+                    </div>
+
+                    <div class="col-auto ms-auto d-print-none">
+                      <div class="btn-list">
+                        <span class="d-none d-sm-inline">
+                          <a href="#" class="btn">
+                            New view
+                          </a>
+                        </span>
+
+                        <a class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report" (click)="showModal()">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                          Mahsulotni linyaga berish.
+                        </a>
+
+                        <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                    <style>
+                        .data-1 {
+                            width: 300px;
+                        }
+
+                        .data-2 {
+                            width: 200px;
+                        }
+
+                        .data-3 {
+                          width: 400px;
+                            display: flex; gap: 10px; align-items: center;
+                        }
+
+                        td {
+                            height: 80px;
+                        }
+
+                        
+                    </style>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-8 mb-4">
+                            <div class="card">
+                              <div class="card-header">
+                                <h3 class="card-title">So'rovlar</h3>
+                              </div>
+                              <div class="table-responsive">
+                                <table class="table card-table table-vcenter">
+                                  <tr *ngFor="let item of notVerifiedComponents">
+                                    <td class="data-1">{{ item.componentCode }} - {{item.componentName}} - {{item.componentSpecs}}</td>
+                                    <td class="data-2">{{ item.quantity }}</td>
+                                    <td class="data-3">
+                                      <button class="tick-button" (click)="acceptRequest(item.id)">
+                                        Qabul qilish
+                                      </button>
+                                
+                                      <button class="discard-button" (click)="cancelRequest(item.id)">
+                                        Bekor qilish
+                                      </button>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                  <h3 class="card-title">Sizdagi mavjud detallar</h3>
+                                </div>
+                                <div class="table-responsive">
+
+                                  <div style="margin: 10px 24px">
+                                    <input 
+                                      type="text" 
+                                      class="form-control" 
+                                      style="width: 100%;  border-color: #0366d6;" placeholder="Qidirish.."
+                                      (keyup)="searchVerifiedComponents($event)" />
+                                  </div>
+
+                                  <table class="table card-table table-vcenter">
+                                    <tr *ngFor="let item of verifiedComponents">
+                                      <td class="data-1">{{ item.componentCode }} - {{item.componentName}} - {{item.componentSpecs}}</td>
+                                      <td class="data-2">{{ item.quantity }}</td>
+                                    </tr>
+                                  </table>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                 </div>
+              </div>
+        </div>
+    </div>
+
+    <div *ngIf="modal" class="modal modal-blur" id="modal-report" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Mahsulotni linyaga berish</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+            </div>
+            
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">Masterni tanlang.</label>
+                <p-dropdown 
+                    [options]="masters" 
+                    [(ngModel)]="selectedMaster"
+                    [showClear]="true" 
+                    placeholder="Master"
+                    [style]="{'width':'100%'}">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="country-item">
+                            {{selectedMaster.firstName}} {{selectedMaster.lastName}}
+                        </div>
+                    </ng-template>
+
+                    <ng-template let-master pTemplate="item">
+                        <div class="country-item">
+                            {{master.firstName}} {{master.lastName}}
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+
+                <span style="color: red;">{{ masterError }}</span>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="mb-3">
+                    <label class="form-label">Detallni tanlang.</label>
+                    
+                    <p-dropdown [style]="{'width':'100%'}"
+                        [options]="verifiedComponents" 
+                        [(ngModel)]="selectedComponent"
+                        [showClear]="true" 
+                        placeholder="Detall">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="country-item">
+                            {{ selectedComponent.componentCode }} - {{selectedComponent.componentName}} - {{selectedComponent.componentSpecs}}
+                        </div>
+                    </ng-template>
+
+                    <ng-template let-component pTemplate="item">
+                        <div class="country-item">
+                            {{ component.componentCode }} - {{component.componentName}} - {{component.componentSpecs}}
+                        </div>
+                    </ng-template>
+                    </p-dropdown>
+                    <span style="color: red;">{{ componentError }}</span>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="mb-3">
+                      <label class="form-label">Qiymat.</label>
+                      
+                      <p-inputNumber
+                        [style]="{'width':'100%'}"  [(ngModel)]="quantity" placeholder="Soni" 
+                        [style.width.%]="100" mode="decimal" [minFractionDigits]="0"
+                        [maxFractionDigits]="5"></p-inputNumber>
+                      <span style="color: red;">{{ quantityError }}</span>
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <a class="btn btn-link link-secondary" data-bs-dismiss="modal" (click)="closeModal()">Cancel</a>
+              
+              <a class="btn btn-primary ms-auto" data-bs-dismiss="modal" (click)="submitComponent()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                <span>Berish.</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="isCreated" class="createdModal">
+        Successfully created!
+      </div>
+
+      <div *ngIf="isGiven" class="createdModal">
+        Muvafaqqiyatli berilidi!
+      </div>
+</div>

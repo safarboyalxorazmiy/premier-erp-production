@@ -1,0 +1,161 @@
+<div class="card" style="padding-left: 10px; padding-right: 10px;">
+    <div class="flex flex-wrap align-items-center justify-content-left card-container blue-container">
+        <h1 class="left-0">Qadoqlash liniyasi</h1>
+    </div>
+    <div class="flex flex-wrap absolute top-0 right-0 align-items-center justify-content-right">
+        <h1 style="padding-right: 20px">{{ time | date: 'HH:mm:ss' }}</h1>
+    </div>
+    <div class="grid">
+        <div class="col">
+            <input type="text" id="door" #doorInput placeholder="Eshik serial" autofocus pInputText
+                [(ngModel)]="doorSerial" />
+        </div>
+        <div class="col">
+            <input type="text" id="packing" #packingInput placeholder="ACC.ASSY Number" pInputText
+                [(ngModel)]="accAss" />
+        </div>
+        <div class="col">
+
+                <div style="display: flex; flex-direction: row; align-self: center;">
+                    <input type="text" id="serial" #serialInput placeholder="Serial Number" (keyup)="change()" autofocus pInputText
+                    [(ngModel)]="serial" />
+                    <div>
+                        <button pButton type="button" style="margin-left: 5px" label="OK" (click)="submit()"></button>
+                    </div> 
+                    <div>
+                        <button pButton type="button" style="margin-left: 5px" label="Clear" (click)="clear()"></button>
+                    </div>
+                    <div *ngFor="let category of printers" class="field-checkbox" style="align-items: center; display: flex; margin-left: 10px;">
+                        <p-radioButton [inputId]="category.id" name="category" [value]="category" [(ngModel)]="selectedPrinter"></p-radioButton>
+                        <label [for]="category.id" style="margin-right: 10px;">{{ category.name }}</label>
+                    </div>
+
+                    <!-- <div class="flex flex-wrap gap-3" style="margin-left: 10px;">
+                        <div class="flex align-items-center">
+                            <p-radioButton name="pizza" value="Cheese" [(ngModel)]="printMode" inputId="0"></p-radioButton>
+                            <label for="ingredient1" class="ml-2">All</label>
+                        </div>
+                        
+                        <div class="flex align-items-center">
+                            <p-radioButton name="pizza" value="Mushroom" [(ngModel)]="printMode" inputId="1"></p-radioButton>
+                            <label for="ingredient2" class="ml-2">1</label>
+                        </div>
+                        
+                        <div class="flex align-items-center">
+                            <p-radioButton name="pizza" value="Pepper" [(ngModel)]="printMode" inputId="2"></p-radioButton>
+                            <label for="ingredient3" class="ml-2">2</label>
+                        </div>
+                    
+                        <div class="flex align-items-center">
+                            <p-radioButton name="pizza" value="Onion" [(ngModel)]="printMode" inputId="3"></p-radioButton>
+                            <label for="ingredient4" class="ml-2">3</label>
+                        </div>
+                    </div> -->
+                </div>
+           
+
+        </div>
+        <div class="col">
+            <p [hidden]="!someError" style="color: red;">{{errorText}}</p>
+            <p [hidden]="!added" style="color: green;">{{addedText}}</p>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="flex left-0 align-content-center align-items-center align-self-center">
+            <p-inputSwitch [(ngModel)]="retry" ariaLabel="Qayta Chiqarih"></p-inputSwitch>
+        </div>
+        <div class="flex left-0 align-content-center align-items-center align-self-center">
+            <h2>Qayta Chiqarish</h2>
+        </div>
+    </div>
+</div>
+<div style="padding-top: 10px">
+    <p-table [value]="lastProduct" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Serial</th>
+                <th>Packing</th>
+                <th>Time</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-prod>
+            <tr>
+                <td>{{prod.serial}}</td>
+                <td>{{prod.packing}}</td>
+                <td>{{prod.time}}</td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+</div>
+<div class="grid">
+    <div class="col">
+        <h2>Bugun ishlab chiqarilgan maxsulot soni: {{count?.smena1}}/{{count?.smena2}}
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+        </h2>
+        <p-table [value]="byModel" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Model</th>
+                    <th>Soni</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-prod>
+                <tr>
+                    <td>{{prod.name}}</td>
+                    <td>{{prod.count}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="col">
+
+    <p-image src="{{getImage(image_name)}}" alt="Image" width="500"></p-image>
+    </div>
+</div>
+<h2>Mavjud detallar ro'yhati </h2>
+<div class="card">
+    <div class="grid">
+        <div class="col">
+            <p-table [value]="rest" styleClass="p-datatable-sm">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product let-index="rowIndex">
+                    <ng-template [ngIf]="product.quantity && index % 2 !=0">
+                        <tr>
+                            <td>{{product.code}}</td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.quantity}}</td>
+                        </tr>
+                    </ng-template>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="col">
+            <p-table [value]="rest" styleClass="p-datatable-sm">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product let-index="rowIndex">
+                    <ng-template [ngIf]="product.quantity && index % 2 ==0">
+                        <tr>
+                            <td>{{product.code}}</td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.quantity}}</td>
+                        </tr>
+                    </ng-template>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+date 1 <p-calendar [showTime]="true" [(ngModel)]="date1"></p-calendar>
+date 2 <p-calendar [showTime]="true" [(ngModel)]="date2"></p-calendar>
+<p-dropdown [options]="lines" [(ngModel)]="selectedLine" optionLabel="name" [showClear]="true" placeholder="Liniya"></p-dropdown>
+
+<p-button label="Submit" (click)="submit()"></p-button>
+
+<p-table [value]="data2" [globalFilterFields]="['id','component', 'checkpoint', 'unit', 'quantity','time']" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <div>Umumiy</div>
+        <tr>
+            <th pSortableColumn="component">Component <p-sortIcon field="component"></p-sortIcon></th>
+            <th pSortableColumn="checkpoint">Line <p-sortIcon field="checkpoint"></p-sortIcon></th>
+            <th pSortableColumn="unit">Unit <p-sortIcon field="unit"></p-sortIcon></th>
+            <th pSortableColumn="quantity">Quantity <p-sortIcon field="quantity"></p-sortIcon></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td >{{product.component}}</td>
+            <td >{{product.checkpoint}}</td>
+            <td >{{product.unit}}</td>
+            <td >{{product.quantity}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-table [value]="data1" [globalFilterFields]="['id','component', 'checkpoint', 'unit', 'quantity','time']" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <div>Dona</div>
+        <tr>
+            <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+            <th pSortableColumn="component">Component <p-sortIcon field="component"></p-sortIcon></th>
+            <th pSortableColumn="checkpoint">Line <p-sortIcon field="checkpoint"></p-sortIcon></th>
+            <th pSortableColumn="unit">Unit <p-sortIcon field="unit"></p-sortIcon></th>
+            <th pSortableColumn="quantity">Quantity <p-sortIcon field="quantity"></p-sortIcon></th>
+            <th pSortableColumn="time">Time <p-sortIcon field="time"></p-sortIcon></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td >{{product.id}}</td>
+            <td >{{product.component}}</td>
+            <td >{{product.checkpoint}}</td>
+            <td >{{product.unit}}</td>
+            <td >{{product.quantity}}</td>
+            <td >{{product.time}}</td>
+        </tr>
+    </ng-template>
+</p-table>

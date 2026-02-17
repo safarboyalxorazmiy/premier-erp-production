@@ -1,0 +1,146 @@
+<div class="card" style="padding-left: 70px; margin-right: 70px; padding-top: 10px; ">
+  <div class="row flex" style="gap: 20px; align-items: center;">
+    <h1>{{selectedModel}}</h1>
+
+    <!-- <p-button label="Print" icon="pi pi-check" 
+        [style]="{'margin': '0 auto', 'width': 'fit-content', 'display': 'block', 'margin-bottom': '0'}" 
+        [disabled]="clicked" (click)="requestSerial(); clicked = true;">
+    </p-button> -->
+
+    <button type="button"pButton icon="pi pi-print" 
+        [disabled]="clicked" (click)="requestSerial(); clicked = true;" 
+        class="p-button-primary px-6">
+        Print.
+    </button>
+    
+    <a href="/metall" style="font-size: 24px; margin-left: 150px;" >Boshqa modelga o'tish</a>
+</div>
+  
+  <div>
+    <p [hidden]="!someError"  style="margin-left: 20px; color: red; text-align: center;">{{errorText}}</p>
+    <h1 [hidden]="!added" style="margin-left: 20px; color: green; text-align: center;">{{addedText}}</h1>
+  </div>
+
+    <div class="d-flex text-center">
+        <h2 style="padding-left: 10px;">Bugun ishlab chiqarilgan maxsulot soni: {{count?.smena1}}/{{count?.smena2}}
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+            class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+        </h2>
+    </div>
+
+  <div class="flex flex-wrap absolute top-0 right-0 align-items-center justify-content-right">
+      <h1 style="padding-right: 100px">{{ time | date: 'HH:mm:ss' }}</h1>
+  </div>
+  <div class="card">
+      <div class="grid">
+          <div class="col">
+              <p-table [value]="lastProduct" responsiveLayout="scroll">
+                  <ng-template pTemplate="header">
+                      <tr>
+                          <th>Serial</th>
+                          <th>Model</th>
+                          <th>Time</th>
+                      </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-prod>
+                      <tr>
+                          <td>{{prod.serial}}</td>
+                          <td>{{prod.model}}</td>
+                          <td>{{prod.time}}</td>
+                      </tr>
+                  </ng-template>
+              </p-table>
+          </div>
+          <div class="col">
+              <p-table [value]="byModel" responsiveLayout="scroll">
+                  <ng-template pTemplate="header">
+                      <tr>
+                          <th>Model</th>
+                          <th>Soni</th>
+                      </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-prod>
+                      <tr>
+                          <td>{{prod.name}}</td>
+                          <td>{{prod.count}}</td>
+                      </tr>
+                  </ng-template>
+
+              </p-table>
+          </div>
+      </div>
+  </div>
+
+    <p-table [value]="otherData" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Name</th>
+                <th>Plan</th>
+                <th>GsCount</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-prod>
+            <tr>
+                <td>{{prod.name}}</td>
+                <td>{{prod.plan}}</td>
+                <td>{{prod.gscount}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <h2>Mavjud detallar ro'yhati </h2>
+    <div class="card">
+        <div class="grid">
+            <div class="col">
+                <p-table [value]="rest" styleClass="p-datatable-sm">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product let-index="rowIndex">
+                        <ng-template [ngIf]="product.quantity && index % 2 !=0">
+                            <tr>
+                                <td>{{product.code}}</td>
+                                <td>{{product.name}}</td>
+                                <td>{{product.quantity}}</td>
+                            </tr>
+                        </ng-template>
+                    </ng-template>
+                </p-table>
+            </div>
+            <div class="col">
+                <p-table [value]="rest" styleClass="p-datatable-sm">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product let-index="rowIndex">
+                        <ng-template [ngIf]="product.quantity && index % 2 ==0">
+                            <tr>
+                                <td>{{product.code}}</td>
+                                <td>{{product.name}}</td>
+                                <td>{{product.quantity}}</td>
+                            </tr>
+                        </ng-template>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" style="display:flex; flex-direction: row; gap: 20px;">
+      <input type="text" style="width: 50%;" (keyup)="change()" id="serial" placeholder="Serial Nomer qayta chiqarish" autofocus
+      pInputText [(ngModel)]="serial" />
+
+      <p-button label="Tasdiqlash" style="align-items: center;" (click)="submit()" [style]="{'margin': '0 auto', 'width': 'fit-content', 'display': 'block', 'margin-bottom': '20px'}"></p-button>
+
+    </div>
+</div>
+
