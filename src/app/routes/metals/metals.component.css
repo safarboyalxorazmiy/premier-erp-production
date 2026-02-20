@@ -168,15 +168,12 @@
     cursor: not-allowed;
 }
 
-/* Reprint history */
-.reprint-history-section {
-    margin-top: 20px;
-    padding: 0 10px;
+/* Spacing between table sections */
+:host ::ng-deep p-table {
+    display: block;
+    margin-bottom: 20px;
 }
 
-.reprint-history-title {
-    margin: 0 0 10px 0;
-    font-size: 15px;
-    font-weight: 600;
-    color: #333;
+:host .card {
+    margin-bottom: 20px;
 }

@@ -53,6 +53,11 @@
         <div class="grid">
             <div class="col">
                 <p-table [value]="lastProduct" responsiveLayout="scroll">
+                    <ng-template pTemplate="caption">
+                        <div class="flex align-items-center justify-content-between">
+                            Oxirgi chiqarilganlar
+                        </div>
+                    </ng-template>
                     <ng-template pTemplate="header">
                         <tr>
                             <th>Serial</th>
@@ -71,6 +76,11 @@
             </div>
             <div class="col">
                 <p-table [value]="byModel" responsiveLayout="scroll">
+                    <ng-template pTemplate="caption">
+                        <div class="flex align-items-center justify-content-between">
+                            Model bo'yicha
+                        </div>
+                    </ng-template>
                     <ng-template pTemplate="header">
                         <tr>
                             <th>Name</th>
@@ -89,30 +99,36 @@
         </div>
     </div>
 
-    <div class="reprint-history-section">
-        <h4 class="reprint-history-title">Qayta chiqarilganlar tarixi</h4>
-        <p *ngIf="!reprintHistory || reprintHistory.length === 0" class="reprint-state-msg">Hali qayta chiqarilmagan</p>
-        <p-table *ngIf="reprintHistory && reprintHistory.length > 0" [value]="reprintHistory" responsiveLayout="scroll"
-            [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-            currentPageReportTemplate="{first} - {last} / {totalRecords}">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Serial</th>
-                    <th>Model</th>
-                    <th>Sana</th>
-                    <th>Vaqt</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-item>
-                <tr>
-                    <td>{{item.serial}}</td>
-                    <td>{{item.model_name}}</td>
-                    <td>{{item.date}}</td>
-                    <td>{{item.time}}</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
+    <p-table [value]="reprintHistory || []" responsiveLayout="scroll"
+        [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+        currentPageReportTemplate="{first} - {last} / {totalRecords}">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                Qayta chiqarilganlar tarixi
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Serial</th>
+                <th>Model</th>
+                <th>Sana</th>
+                <th>Vaqt</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr>
+                <td>{{item.serial}}</td>
+                <td>{{item.model_name}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.time}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="4" style="text-align: center; color: #999; padding: 20px;">Hali qayta chiqarilmagan</td>
+            </tr>
+        </ng-template>
+    </p-table>
 
     <p-dialog header="Qayta chiqarish (3 kunlik)" [(visible)]="reprintDialogVisible" [modal]="true"
         [style]="{width: '750px', maxHeight: '85vh'}" [draggable]="false" [resizable]="false">
