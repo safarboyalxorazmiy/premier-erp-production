@@ -170,6 +170,14 @@ export class ProductionService {
     })
   }
 
+  public async getMetalsReprintHistory(){
+    return new Promise<any>((resolve) => {
+      this.http.post<any>(this.server.ServerName+'/production/metals/reprint/history', "").subscribe(e=>{
+        resolve(e);
+      })
+    })
+  }
+
   public async getDoorsTodayPrinted(){
     return new Promise<any>((resolve) => {
       this.http.post<any>(this.server.ServerName+'/production/doors/today/printed', "").subscribe(e=>{

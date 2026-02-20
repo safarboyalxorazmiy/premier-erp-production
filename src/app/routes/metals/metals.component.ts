@@ -50,6 +50,7 @@ export class MetalsComponent implements OnInit {
   reprintClicked: boolean = false
   selectedReprintGroup: string = ''
   reprintSearchSerial: string = ''
+  reprintHistory: any[] = []
 
   constructor(private route: ActivatedRoute, public api: ProductionService, public renderer: Renderer2) { }
 
@@ -78,6 +79,7 @@ export class MetalsComponent implements OnInit {
     this.rest = await this.api.getSectorBalance(line)
     
     this.getPlan()
+    this.loadReprintHistory()
 
   }
   
@@ -184,6 +186,10 @@ export class MetalsComponent implements OnInit {
     this.selectedReprintGroup = ''
     this.reprintDays = []
     this.reprintSearchSerial = ''
+    let historyResult = await this.api.getMetalsReprintHistory()
+    if (historyResult.result === 'ok') {
+      this.reprintHistory = historyResult.data || []
+    }
     let result = await this.api.getMetalsTodayPrinted()
     if (result.result === 'ok') {
       let items = result.data || []
@@ -255,6 +261,7 @@ export class MetalsComponent implements OnInit {
       this.errorText = ''
       this.added = true
       this.addedText = 'Qayta chiqarildi'
+      this.loadReprintHistory()
       setTimeout(() => {
         this.added = false
         this.addedText = 'Kiritildi'
@@ -279,6 +286,7 @@ export class MetalsComponent implements OnInit {
       this.added = true
       this.addedText = 'Qayta chiqarildi'
       this.reprintSearchSerial = ''
+      this.loadReprintHistory()
       setTimeout(() => {
         this.added = false
         this.addedText = 'Kiritildi'
@@ -287,6 +295,13 @@ export class MetalsComponent implements OnInit {
     setTimeout(() => {
       this.reprintClicked = false
     }, 3000)
+  }
+
+  async loadReprintHistory() {
+    let res = await this.api.getMetalsReprintHistory()
+    if (res.result === 'ok') {
+      this.reprintHistory = res.data || []
+    }
   }
 
   async exportExcel() {
